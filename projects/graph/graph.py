@@ -93,7 +93,26 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        q = Queue()
+        q.enqueue([starting_vertex])
+        visited = set()
+
+        while q.size() > 0:
+            path_list = q.dequeue()
+            last_vertex = path_list[-1]
+
+            if last_vertex not in visited:
+                if last_vertex == destination_vertex:
+                    return path_list
+                visited.add(last_vertex)
+
+                for neighbor in self.get_neighbors(last_vertex):
+                    path = list(path_list)
+                    path.append(neighbor)
+                    q.enqueue(path)
+
+                    if neighbor == destination_vertex:
+                        return path
 
     def dfs(self, starting_vertex, destination_vertex):
         """
@@ -103,7 +122,7 @@ class Graph:
         """
         pass  # TODO
 
-    def dfs_recursive(self, starting_vertex):
+    def dfs_recursive(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
