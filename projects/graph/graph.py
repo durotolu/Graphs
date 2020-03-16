@@ -21,7 +21,6 @@ class Graph:
         """
         if v1 in self.vertices and v2 in self.vertices:
             self.vertices[v1].add(v2)
-            self.vertices[v2].add(v1)
         else:
             raise IndexError('vertex doenst exist')
 
@@ -76,7 +75,17 @@ class Graph:
 
         This should be done using recursion.
         """
-        if 
+        visited = set()
+
+        def dft_recursive_helper(vertex, visited):
+            visited.add(vertex)
+            print(vertex)
+        
+            for next_vertex in self.vertices[vertex]:
+                if next_vertex not in visited:
+                    dft_recursive_helper(next_vertex, visited)
+        
+        dft_recursive_helper(starting_vertex, visited)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
