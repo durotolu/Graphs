@@ -149,7 +149,24 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        visited = set()
+        path = []
+
+        def dfs_recursive_helper(s_vertex, d_vertex, visited, path):
+            visited.add(s_vertex)
+            path = path + [s_vertex]
+            print(path)
+            if s_vertex == d_vertex:
+                return path
+        
+            for neighbor in self.get_neighbors(s_vertex):
+                if neighbor not in visited:
+                    updated_path = dfs_recursive_helper(neighbor, d_vertex, visited, path)
+                    if updated_path:
+                        return updated_path
+            return None
+
+        return dfs_recursive_helper(starting_vertex, destination_vertex, visited, path)
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
